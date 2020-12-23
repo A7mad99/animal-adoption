@@ -1,24 +1,29 @@
-   import React from 'react';
-   import {render} from 'react-dom'
-   import Pet  from './pet';
-   import SearchParams from "./SearchParams"
+import React, { useState } from "react";
+import { render } from "react-dom";
+import Pet from "./pet";
+import { Link, Router, router } from "@reach/router";
+import SearchParams from "./SearchParams";
+import Details from "./Details";
+import themeContext from "./themeContext";
 
-       const App = () =>{
-        
-        return(
-            <div>
-                <h1 id="important">Adopt me</h1>
-                <SearchParams></SearchParams>
-                
-                {/* <Pet name="luna" animal="dog" breed="m"></Pet>
-                <Pet name="pepper" animal="dog" breed="m"></Pet>
-                <Pet name="jone" animal="dog" breed="m"></Pet> */}
-            </div>
-        )
-    };
+const App = () => {
+  const themeHook = useState("peru");
 
-    render(
-        <App/>,
-        document.getElementById("root") 
-    );
-    
+  return (
+    <React.StrictMode>
+      <themeContext.Provider value={themeHook}>
+        <div>
+          <header>
+            <Link to="/">Adopt me!!</Link>
+          </header>
+          <Router>
+            <SearchParams path="/" />
+            <Details path="/details/:id" />
+          </Router>
+        </div>
+      </themeContext.Provider>
+    </React.StrictMode>
+  );
+};
+
+render(<App />, document.getElementById("root"));
