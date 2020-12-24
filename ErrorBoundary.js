@@ -4,7 +4,7 @@ import React from "react";
 import { Link, Redirect } from "@reach/router";
 
 //this will catch an error that occur in any children(render fallback UI after catching error)
-class ErrorBoundary extends react.Component {
+class ErrorBoundary extends React.Component {
   state = { hasError: false, redirect: false };
   static getDerivedFromError() {
     return { hasError: true };

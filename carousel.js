@@ -5,18 +5,7 @@ class Carousel extends React.Component {
     photos: [],
     active: 0,
   };
-  //getDrived take set of properties does some filtering on them then pass them to the component usedto reduce needless re-rendering
-  static getDrivedStateFromProps({ media }) {
-    let photos = ["http://placecorgi.com/600/600"];
 
-    if (media.length) {
-      //photos will be array of urls
-      //now we pick large imgs using map
-      photos = media.map(({ large }) => large);
-    }
-
-    return { photos };
-  }
   handleIndexClick = (event) => {
     this.setState({
       //the plus sign is just like parsenInt (convert to int)
@@ -24,20 +13,21 @@ class Carousel extends React.Component {
     });
   };
   render() {
-    const { photos, active } = this.state;
-
+    const { active } = this.state;
+    const { media } = this.props;
     return (
+      // this was smadi work
       <div className="carousel">
-        <img src={photos[active]} alt="animal" />
+        <img src={media[active].large} alt="animal" />
         <div className="carousel-smaller">
-          {photos.map((photo, index) => (
+          {media.map((photo, index) => (
             //eslint-disable-next-line
             <img
               //i can pick the size of photo doing key=photo.large
-              key={photo}
+              key={index}
               onClick={this.handleIndexClick}
               data-index={index}
-              src={photo}
+              src={photo.medium}
               className={index === active ? "active" : ""}
               alt="animal-thumbnail"
             />
