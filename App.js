@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { render } from "react-dom";
-import Pet from "./pet";
-import { Link, Router, router } from "@reach/router";
-import SearchParams from "./SearchParams";
-import Details from "./Details";
+//import ReactDOM from "react-dom"
+// import Pet from "./pet";
+import { Link, Router } from "@reach/router";
+//import SearchParams from "./SearchParams";
+// import Details from "./Details";
 import themeContext from "./themeContext";
+import NavBar from "./navBar";
+
+// use lazy for spliting
+const Details = lazy(() => import("./Details"));
+const SearchParams = lazy(() => import("./SearchParams"));
 
 const App = () => {
   const themeHook = useState("peru");
@@ -16,14 +22,18 @@ const App = () => {
           <header>
             <Link to="/">Adopt me!!</Link>
           </header>
-          <Router>
-            <SearchParams path="/" />
-            <Details path="/details/:id" />
-          </Router>
+
+          <Suspense fallback={<h1>loading route</h1>}>
+            <Router>
+              <SearchParams path="/" />
+              <Details path="/details/:id" />
+            </Router>
+          </Suspense>
         </div>
       </themeContext.Provider>
     </React.StrictMode>
   );
 };
 
-render(<App />, document.getElementById("root"));
+// render(<App />, document.getElementById("root"));
+export default App;
