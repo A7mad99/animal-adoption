@@ -1,12 +1,12 @@
 import React, { useState, lazy, Suspense } from "react";
-import { render } from "react-dom";
+//import { render } from "react-dom";
 //import ReactDOM from "react-dom"
 // import Pet from "./pet";
 import { Link, Router } from "@reach/router";
 //import SearchParams from "./SearchParams";
 // import Details from "./Details";
 import themeContext from "./themeContext";
-import NavBar from "./navBar";
+//import NavBar from "./navBar";
 
 // use lazy for spliting
 const Details = lazy(() => import("./Details"));
